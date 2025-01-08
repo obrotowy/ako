@@ -608,13 +608,14 @@ _wolne_miejsce PROC
     ___ eax, 4
     push eax	; lpNumberOfFreeClusters
 
-    push ebp
+    mov eax, ebp
     sub ___, 12
+    push eax    ; lpBytesPerSector
 
     ___ eax, [ebp-16]
-    push eax
+    push eax    ; lpSectorsPerCluster
 
-    push [ebp+8]
+    push [ebp+8]    ; lpRootPathName
     call _GetDiskFreeSpaceA@20
     add esp, ___
     ; freeSpace = SectorsPerCluster*BytesPerSector*NumberOfFreeClusters
@@ -851,4 +852,36 @@ not_equal:
 done:
     ; Tu dalszy kod programu
     nop
+```
+
+## Rozwiązanie do zadania 
+```
+_wolne_miejsce PROC
+	push ebp
+	mov ebp, esp
+	sub esp, 16 ; rezerwacja miejsca na stosie na wyjscie funkcji
+	lea eax, [ebp-4]
+	push eax ; lpTotalNumberOfClusters
+	sub eax, 4
+	push eax ; lpNumberOfFreeClusters
+	mov eax, ebp
+	sub eax, 12	; lpBytesPerSector
+	push eax
+	lea eax, [ebp-16]
+	push eax	;lpSectorsPerCluster
+	push [ebp+8]
+	call _GetDiskFreeSpaceA@20
+	add esp, 0
+	; freeSpace = SectorsPerCluster*BytesPerSector*NumberOfFreeClusters
+	mov eax, [ebp-8]
+	mov edx, 0
+	mul dword PTR [ebp-12]
+	mul dword PTR [ebp-16]
+	push 1048576
+	div dword PTR [esp]
+	add esp, 4
+	add esp, 16
+	pop ebp
+	ret
+_wolne_miejsce 
 ```
