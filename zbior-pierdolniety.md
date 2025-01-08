@@ -689,6 +689,8 @@ _read2msg PROC
     push 0
     call _MessageBoxW@16
     add esp, ___
+    mov esp, ebp
+    pop ebp
     ret
 _read2msg ENDP
 ```
@@ -715,7 +717,8 @@ _miesz2float PROC
     add esp, 4         ; Usuń z stosu
 
     ; Podziel część ułamkową przez 2^32 (0x4F000000 w IEEE 754)
-    mov eax, 4f000000h ; 2^32 w formacie float
+    ; tutaj byl blad^
+    mov eax, 4f800000h ; 2^32 w formacie float
     push eax           ; Umieść na stos
     fld dword ptr [esp]   ; Załaduj 2^32 do ST(0)
     add esp, 4         ; Usuń z stosu
@@ -854,7 +857,7 @@ done:
     nop
 ```
 
-## Rozwiązanie do zadania 
+## Rozwiązanie do zadania 6
 ```
 _wolne_miejsce PROC
 	push ebp
@@ -884,4 +887,36 @@ _wolne_miejsce PROC
 	pop ebp
 	ret
 _wolne_miejsce 
+```
+
+## Rozwiązanie do zadania 7
+```
+_read2msg PROC
+	push ebp
+	mov ebp, esp
+	sub esp, 512
+	push dword ptr 'r'
+	push esp
+	push [ebp+8]
+	call _fopen
+	add esp, 8
+	push eax
+	push 512
+	push 1
+	lea eax, [ebp-512]
+	push eax
+	call _fread
+	add esp, 16
+	lea eax, [ebp-512]
+	push 0
+	push eax
+	push eax
+	push 0
+	call _MessageBoxW@16
+	add esp, 0
+
+	mov esp, ebp
+	pop ebp
+	ret
+_read2msg ENDP
 ```
