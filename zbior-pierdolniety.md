@@ -695,6 +695,128 @@ _read2msg PROC
 _read2msg ENDP
 ```
 
+## Zadanie 8
+Jaka wartość znajdzie się na wierzchołku zwykłego stostu? Przedstaw ją zarówno w formie heksadecymalnej (np. 41ab0000h), jak i dziesiętnej po zdekodowaniu (np. 21.375)
+
+1.
+>```
+>push 40599000h
+>push 00000000h
+>push 42988000h
+>fld qword PTR [esp+4]
+>fld dword PTR [esp]
+>add esp, 12
+>faddp
+>sub esp, 4
+>fstp dword PTR [esp]
+>```
+2.
+>```
+>push 42250000h
+>push 42824000h
+>fld dword PTR [esp+4]
+>fld dword PTR [esp]
+>add esp, 8
+>fmulp
+>sub esp, 10
+>fstp tbyte PTR [esp]
+>```
+3.
+>```
+>push 421E0000h
+>push 4058D000h
+>push 00000000h
+>fld dword PTR [esp+8]
+>fld qword PTR [esp]
+>add esp, 12
+>fsubp
+>sub esp, 4
+>fstp dword PTR [esp]
+>```
+4.
+>```
+>push 40544800h
+>push 00000000h
+>push 42660000h
+>fld qword PTR [esp+4]
+>fld dword PTR [esp]
+>add esp, 12
+>fdivp
+>sub esp, 8
+>fstp qword PTR [esp]
+>```
+5.
+>```
+>push 42FD0000h
+>push 40419000h
+>push 00000000h
+>fld dword PTR [esp+8]
+>fld qword PTR [esp]
+>add esp, 12
+>fmulp
+>sub esp, 4
+>fstp dword PTR [esp]
+>```
+6.
+>```
+>push 42908000h
+>push 40540800h
+>push 00000000h
+>fld dword PTR [esp+8]
+>fld qword PTR [esp]
+>add esp, 12
+>fdivp
+>sub esp, 4
+>fstp dword PTR [esp]
+>```
+7.
+>```
+>push 428C4000h
+>push 40538800h
+>push 00000000h
+>fld dword PTR [esp+8]
+>fld qword PTR [esp]
+>add esp, 12
+>fsubp
+>sub esp, 10
+>fstp tbyte PTR [esp]
+>```
+8.
+>```
+>push 40539000h
+>push 00000000h
+>push 42790000h
+>fld qword PTR [esp+4]
+>fld dword PTR [esp]
+>add esp, 12
+>faddp
+>sub esp, 10
+>fstp tbyte PTR [esp]
+>```
+9.
+>```
+>push 40600400h
+>push 00000000h
+>push 41DC0000h
+>fld qword PTR [esp+4]
+>fld dword PTR [esp]
+>add esp, 12
+>fdivp
+>sub esp, 8
+>fstp qword PTR [esp]
+>```
+10.
+>```
+>push 41D20000h
+>push 42688000h
+>fld dword PTR [esp+4]
+>fld dword PTR [esp]
+>add esp, 8
+>fdivp
+>sub esp, 4
+>fstp dword PTR [esp]
+>```
+
 # Rozwiązania
 ## Rozwiązanie do zadania 1.
 ```
