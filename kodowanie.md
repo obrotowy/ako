@@ -14,6 +14,7 @@ dd globus ?
 mov ebx, dword PTR globus
 ```
 ![Schemat kodowania instrukcji mov reg, mem](image-1.png)
+
 - d=1 -> reg odbiera wiadomość
 - w=1 -> 4 bajtowe dane
 - reg=011 (kod EBXa)
@@ -29,6 +30,7 @@ mov [ebx*4+12], ecx
 ```
 ![Schemat kodowania instrukcji mov reg, mem](image-1.png)
 ![Schemat bajtu SIB](image-2.png)
+
 - d=0 -> zapisujemy zawartosc rejestru do pamięci
 - w=1 -> operujemy na 4-bajtowych danych
 - zauważmy, że w **[ebx*4+12]** nie mamy base, mamy jedynie indeks, jako że nie ma możliwości zakodowania **base=nieistnieje** musimy skorzystać z wyżej podanej własności **mod=00 i base=101 -> base sie ignoruje**
