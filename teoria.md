@@ -24,19 +24,15 @@ Procesor ustala to poprzez xor wartości dwóch ostatnich pożyczek
 
 ## Zad. 4
 ```c
-k = strlen(dana);
-```
-Lub bez wykorzystania `<string.h>`
-```c
-k = 0
-while (true) {
-    if (dana[k] == 0) {
+// Zakładamy, że dana jest już zainicjowana
+char* k = dana;
+for (int i = 0; i<10; ++i) {
+    ++k;
+    if (*k == '0') {
         break;
     }
-    ++k;
 }
 ```
-
 ## Zad. 5
 Należy zamaskować wyjątek (choć ten domyślnie już taki jest) dzielenia przez 0, poprzez ustawienie bitu **ZM=1**.
 
